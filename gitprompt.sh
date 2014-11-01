@@ -392,10 +392,11 @@ function updatePrompt() {
   local GIT_UNTRACKED=${GitStatus[5]}
   local GIT_STASHED=${GitStatus[6]}
   local GIT_CLEAN=${GitStatus[7]}
+  local GIT_REPO=$(replaceSymbols ${GitStatus[8]})
 
   local NEW_PROMPT="$EMPTY_PROMPT"
   if [[ -n "$GitStatus" ]]; then
-    local STATUS="${PROMPT_LEADING_SPACE}${GIT_PROMPT_PREFIX}${GIT_PROMPT_BRANCH}${GIT_BRANCH}${ResetColor}"
+    local STATUS="${PROMPT_LEADING_SPACE}${GIT_PROMPT_PREFIX}${GIT_PROMPT_BRANCH}${GIT_REPO}:${GIT_BRANCH}${ResetColor}"
 
     # __add_status KIND VALEXPR INSERT
     # eg: __add_status  'STAGED' '-ne 0'

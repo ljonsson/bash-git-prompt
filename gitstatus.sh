@@ -26,6 +26,7 @@ case "$gitsym" in fatal*) exit 0 ;; esac
 
 # the current branch is the tail end of the symbolic reference
 branch="${gitsym##refs/heads/}"    # get the basename after "refs/heads/"
+repo="$(basename `git rev-parse --show-toplevel`)"
 
 gitstatus=`git diff --name-status 2>&1`
 
@@ -105,7 +106,7 @@ if [[ "$has_remote_tracking" == "0" ]] ; then
   remote='_NO_REMOTE_TRACKING_'
 fi 
 
-for w in "$branch" "$remote" $num_staged $num_conflicts $num_changed $num_untracked $num_stashed $clean ; do
+for w in "$branch" "$remote" $num_staged $num_conflicts $num_changed $num_untracked $num_stashed $clean "$repo"; do
   echo "$w"
 done
 
